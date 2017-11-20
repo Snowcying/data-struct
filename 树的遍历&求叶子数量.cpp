@@ -1,12 +1,14 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iomanip>
+#include <fstream>
 #define OVERFLOW 0
 #define ERROR 0
 #define LENGTH 100
 
 using namespace std;
-
+//ifstream inFile;
 typedef struct  BiTNode
 {
 	char data;
@@ -17,7 +19,11 @@ void CreateBiTree(BiTree &T)
 {
 	char ch;
 //	scanf(&ch);
+//	ifstream inFile;
+//	inFile.open("TEST.txt");
+//	freopen("TEST.txt","r",stdin);
 	cin>>ch;
+//	inFile>>ch;
 	if(ch=='#') T=NULL;
 	else
 	{
@@ -44,10 +50,10 @@ void PreOrderTraverse(BiTree T,int &l)
 		PreOrderTraverse(T->lchild,l);
 		PreOrderTraverse(T->rchild,l);
 	}
-	else
-	{
-		cout<<"#";
-	}
+//	else
+//	{
+//		cout<<"#";
+//	}
 }
 void InOrderTraverse(BiTree T)
 {
@@ -58,11 +64,11 @@ void InOrderTraverse(BiTree T)
 		Visit(T->data);
 		InOrderTraverse(T->rchild);
 	}
-	else
-	{
-		cout<<"#";
-	}
-	
+//	else
+//	{
+//		cout<<"#";
+//	}
+//	
 }
 
 void EndOrderTraverse(BiTree T)
@@ -74,24 +80,26 @@ void EndOrderTraverse(BiTree T)
 		EndOrderTraverse(T->rchild);
 		Visit(T->data);
 	}
-	else
-	{
-		cout<<"#";
-	}
+//	else
+//	{
+//		cout<<"#";
+//	}
 }
 //abcdegf	cbegdfa		cgefdba abc##de#g##f###
 int main()
 {
+	freopen("TEST.txt","r",stdin);
+	
 	BiTNode *t; 
 	CreateBiTree(t);
 //	cout<<t->data;
 	int leaf=0;
 	PreOrderTraverse(t,leaf);
 	cout<<endl<<leaf;
-//	cout<<endl;
-//	InOrderTraverse(t);
-//	cout<<endl;
-//	EndOrderTraverse(t);
+	cout<<endl;
+	InOrderTraverse(t);
+	cout<<endl;
+	EndOrderTraverse(t);
 	
 	return 0;
 }
