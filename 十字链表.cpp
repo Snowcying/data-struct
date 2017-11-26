@@ -78,7 +78,7 @@ int NextAdjVex(OLGraph g,int v,int w)
 }
 void DFS(OLGraph G,int v)
 {
-	cout<<v<<" ";
+	cout<<v;
 	visited[v]=true;
 	VexNode v1=VisitFunc(v,G);
 	for(int w=FirstAdjVex(G,v);w>=0;w=NextAdjVex(G,v,w))
@@ -106,6 +106,19 @@ void DFSTraverse(OLGraph G)
 
 queue <int> Q1;
 
+int NextAdjVexof(OLGraph g,int v,int w)
+{
+	
+	if(g.xlist[w].firstout)
+	{
+		int end=g.xlist[w].firstout->tailvex;
+		if(!visited[end])
+			return end;
+		else return -1;
+	}
+	else return -1;
+}
+
 void BFSTraverse(OLGraph G)
 {
 	for(int i=1;i<=G.vexnum;i++)
@@ -123,8 +136,29 @@ void BFSTraverse(OLGraph G)
 			{
 				int u=Q1.front();
 				Q1.pop();
-				for(int w=FirstAdjVex(G,u);w>=0;w=NextAdjVex(G,u,w))
+//				for(int w=FirstAdjVex(G,u);w>=0;w=NextAdjVexof(G,u,w))
+//				{
+//					if(!visited[w])
+//					{
+//						visited[w]=true;
+//						cout<<w;
+//						Q1.push(w);
+//					}
+//				}
+				ArcBox *temp=G.xlist[u].firstout;
+				for(int w=FirstAdjVex(G,u);w>0;)
 				{
+					if(temp->tlink)
+					{
+						temp=temp->tlink;
+						w=temp->headvex;
+					}
+					else
+					{
+						break;
+						
+					}
+					
 					if(!visited[w])
 					{
 						visited[w]=true;
@@ -144,7 +178,13 @@ int main()
 	OLGraph g1;
 	CreateDG(g1);
 //	cout<<g1.xlist[1].firstout->tailvex;
-//	DFSTraverse(g1);
+	DFSTraverse(g1);
+	cout<<endl;
+//	cout<<g1.xlist[1].firstout->tlink->tailvex; 
 	BFSTraverse(g1);
+//	ArcBox *temp=g1.xlist[1].firstout;
+//	cout<<temp->tailvex;
+//	temp=temp->tlink;
+//	cout<<temp->tailvex;
 	return 0;
 }
