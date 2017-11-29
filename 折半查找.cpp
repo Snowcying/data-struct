@@ -31,7 +31,7 @@ void Search_Bin(SSTable ST,int key,int low,int high)
 	else
 	{
 		int mid=(low+high)/2;
-		if(ST.num[mid]==key)	cout<<"find already:"<<key;
+		if(ST.num[mid]==key)	cout<<"find already:"<<mid;
 		else if(ST.num[mid]>key)	Search_Bin(ST,key,low,mid-1);
 		else	Search_Bin(ST,key,mid+1,high);
 	}
