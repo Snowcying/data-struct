@@ -71,16 +71,23 @@ int  Partition(SqList &L,int low,int high)
 	while(low<high)
 	{
 		while(low<high&&L.num[high]>=key)	--high;
-		L.num[low]=L.num[high];
+		// L.num[low]=L.num[high];
+		int temp=L.num[low];
+         L.num[low]=L.num[high];
+         L.num[high]=temp;
+
 		while(low<high&&L.num[low]<=key)	++low;
-		L.num[high]=L.num[low];
+		// L.num[high]=L.num[low];
+		temp=L.num[low];
+         L.num[low]=L.num[high];
+         L.num[high]=temp;
 	}
-	L.num[low]=L.num[0];
+	// L.num[low]=L.num[0];
 	return low;
 }
 void QSort(SqList &L,int low,int high)
 {
-	if(low<high)
+	if(low<=high)
 	{
 		int key=Partition(L,low,high);
 		QSort(L,low,key-1);
@@ -153,11 +160,11 @@ int main()
 	PrintSqList(l);
 	
 	
-//	InsertSort(l);
-//	BInsertSort(l);
-//	QSort(l,1,10);
-//	SelectSort(l);
-	HeapSort(l);
+	// InsertSort(l);
+	// BInsertSort(l);
+	QSort(l,1,7);
+    // SelectSort(l);
+	// HeapSort(l);
 	
 	PrintSqList(l);
 	return 0;
